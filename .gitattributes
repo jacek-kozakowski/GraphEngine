@@ -1,0 +1,19 @@
+* text=auto
+
+
+*.cpp text
+*.h   text
+*.hpp text
+*.c   text
+
+CMakeLists.txt text
+*.cmake text
+
+# Data files
+*.txt text
+*.csv text
+
+*.png binary
+*.jpg binary
+*.exe binary
+*.out binary

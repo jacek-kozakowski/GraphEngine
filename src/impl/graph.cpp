@@ -2,7 +2,9 @@
 // Created by Jacek Kozakowski on 28/12/2025.
 //
 
-#include "graph.h"
+#include "../include/graph.h"
+
+#include <iostream>
 
 Graph::Graph(int n) : n(n) {
     vertices = new Vertex[n];
@@ -37,4 +39,15 @@ int Graph::size() const {
 
 Vertex* Graph::getVertices() const{
     return vertices;
+}
+
+void Graph::printGraph() const {
+    std::cout << "Graph edges: \n";
+    for (int i = 0; i < n; i++) {
+        Edge* e = vertices[i].head;
+        while(e) {
+            std::cout << i <<"->" << e->to << ", w: " << e->weight << std::endl;
+            e = e->next;
+        }
+    }
 }

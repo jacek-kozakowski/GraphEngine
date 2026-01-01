@@ -28,6 +28,6 @@ int Queue::pop() {
     return val;
 }
 
-bool Queue::empty() {
+bool Queue::empty() const{
     return front == back;
 }

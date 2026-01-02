@@ -19,6 +19,7 @@ public:
   static void dijkstra(const Graph &graph, int start = 0);
   static void prim(const Graph &graph, int start = 0);
   static void kruskal(const Graph &graph, int start = 0);
+  static void edmondskarp(const Graph &graph, int source, int sink);
   static void astar(const SpatialGraph &graph, int start, int goal,
                     int heuristic_type = 0);
 };

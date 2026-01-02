@@ -67,7 +67,8 @@ int main() {
     std::cout << " 4. MST Algorithms (Prim/Kruskal)\n";
     std::cout << " 5. Shortest Path (Dijkstra/Bellman Ford)\n";
     std::cout << " 6. A* Algorithm (Spatial only)\n";
-    std::cout << " 7. Quit\n";
+    std::cout << " 7. Max Flow (Edmonds Karp)\n";
+    std::cout << " 8. Quit\n";
     std::cout << "\nChoice: ";
 
     if (!(std::cin >> choice)) {
@@ -76,7 +77,7 @@ int main() {
       continue;
     }
 
-    if (choice == 7)
+    if (choice == 8)
       break;
 
     switch (choice) {
@@ -205,6 +206,25 @@ int main() {
       std::cout << " Goal node: ";
       std::cin >> goal;
       Algorithms::astar(*currentSpatialGraph, start, goal, 0);
+      waitForEnter();
+      break;
+    }
+    case 7: {
+      if (!currentGraph && !currentSpatialGraph) {
+        std::cout << "Load a graph first!";
+        waitForEnter();
+        break;
+      }
+      printHeader("FORD-FULKERSON (MAX FLOW)");
+      int source, sink;
+      std::cout << " Enter source node index: ";
+      std::cin >> source;
+      std::cout << " Enter sink node index: ";
+      std::cin >> sink;
+
+      const Graph &g = currentGraph ? *currentGraph : *currentSpatialGraph;
+      Algorithms::edmondskarp(g, source, sink);
+
       waitForEnter();
       break;
     }

@@ -318,11 +318,96 @@ void Algorithms::kruskal(const Graph &graph, int start) {
   delete[] edges;
 }
 
+void Algorithms::edmondskarp(const Graph &graph, int source, int sink) {
+  int n = graph.size();
+  if (source > n - 1 || source < 0) {
+    cout << "Starting vertex not in graph!\n";
+    return;
+  }
+  if (sink > n - 1 || sink < 0) {
+    cout << "Sink vertex not in graph!\n";
+    return;
+  }
+  int **residualCap = new int *[n];
+  for (int i = 0; i < n; i++) {
+    residualCap[i] = new int[n]();
+  }
+
+  for (int u = 0; u < n; u++) {
+    Edge *e = graph.getVertices()[u].head;
+    while (e) {
+      int v = e->to;
+      int w = e->weight;
+      residualCap[u][v] += w;
+      e = e->next;
+    }
+  }
+
+  int *parent = new int[n];
+  int maxFlow = 0;
+
+  while (true) {
+    for (int i = 0; i < n; i++)
+      parent[i] = -1;
+
+    Queue q(n);
+    q.push(source);
+    parent[source] = source;
+    bool found = false;
+
+    while (!q.empty()) {
+      int u = q.pop();
+
+      if (u == sink) {
+        found = true;
+        break;
+      }
+      for (int v = 0; v < n; v++) {
+        if (parent[v] == -1 && residualCap[u][v] > 0) {
+          parent[v] = u;
+          q.push(v);
+        }
+      }
+      if (found)
+        break;
+    }
+    if (!found)
+      break;
+
+    int pathFlow = INT_MAX;
+
+    for (int v = sink; v != source; v = parent[v]) {
+      int u = parent[v];
+      if (residualCap[u][v] < pathFlow) {
+        pathFlow = residualCap[u][v];
+      }
+    }
+    for (int v = sink; v != source; v = parent[v]) {
+      int u = parent[v];
+      residualCap[u][v] -= pathFlow;
+      residualCap[v][u] += pathFlow;
+    }
+    maxFlow += pathFlow;
+  }
+  cout << "Maximum flow: " << maxFlow << endl;
+
+  for (int i = 0; i < n; i++) {
+    delete[] residualCap[i];
+  }
+
+  delete[] residualCap;
+  delete[] parent;
+}
+
 void Algorithms::astar(const SpatialGraph &graph, int start, int goal,
                        int heuristic_type) {
   int n = graph.size();
   if (start > n - 1 || start < 0) {
     cout << "Starting vertex not in graph!\n";
+    return;
+  }
+  if (goal > n - 1 || goal < 0) {
+    cout << "Goal vertex not in graph!\n";
     return;
   }
   if (heuristic_type > 1 || heuristic_type < 0) {
@@ -378,6 +463,7 @@ void Algorithms::astar(const SpatialGraph &graph, int start, int goal,
       cout << "<-" << v;
   }
   cout << endl;
+  cout << "PATH LENGTH: " << g[goal] << endl;
 
   delete[] closed;
   delete[] g;

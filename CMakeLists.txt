@@ -15,4 +15,6 @@ add_executable(graphengine main.cpp
         src/data_structures/minheap.h
         src/impl/io.cpp
         src/include/io.h
-        src/impl/spatialgraph.cpp)
+        src/impl/spatialgraph.cpp
+        src/include/BST.h
+        src/impl/BST.cpp)

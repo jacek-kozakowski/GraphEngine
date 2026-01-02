@@ -11,10 +11,14 @@ Graphs are represented using an adjacency list for efficient memory usage and tr
   - **Dijkstra & Bellman-Ford:** Shortest path algorithms (Bellman-Ford supports negative weights).
   - **Prim & Kruskal:** Minimum Spanning Tree (MST) algorithms.
   - **A\* Search:** Heuristic-based shortest path for spatial graphs.
+- **Tree Algorithms:**
+  - **BST Operations:** Search, implementation of iterative insert and delete.
+  - **Traversals:** In-order, Pre-order, and Post-order recursive traversals.
+  - **DSW Algorithm:** Day-Stout-Warren algorithm for rebalancing a BST into a perfectly balanced tree.
 - **Custom Data Structures:**
-  - Implementation of `Queue`, `Stack`, `MinHeap`, and `DSU`.
+  - Implementation of `Queue`, `Stack`, `MinHeap`, `DSU`, and `BST`.
 - **Interactive TUI:**
-  - A clean, terminal-based interface with automatic screen clearing and state management.
+  - A categorized terminal-based interface (Graphs vs Trees) with automatic screen clearing and state management.
 - **IO System:** Support for loading standard and spatial graphs from comma-separated or space-separated files.
 
 ## Compilation
